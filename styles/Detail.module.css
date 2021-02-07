@@ -1,0 +1,120 @@
+.container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.main {
+	flex: 1;
+	width: 100vw;
+	height: 100%;
+	display: grid;
+	grid-template-columns: 50vw 50vw;
+	grid-template-areas:
+		'hero info'
+}
+.colors{
+	display: flex;
+}
+.selectorColor{
+	border: 1px solid #a5a5a5;
+	border-radius: 15px;
+	padding: 70px 0 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	background-color: #ffffff;
+	position: relative;
+	cursor: pointer;
+}
+.selectorColor + .selectorColor{
+	margin-left: 10px;
+}
+
+
+.colorDisplay{
+	width: calc(100% - 20px);
+	height: 50px;
+	border-radius: 10px;
+	transition: .2s;
+	position: absolute;
+	top: 10px;
+}
+.selectorColor:hover .colorDisplay{
+	width: 100%;
+	height: 100%;
+	border-radius: 14px;
+	top: 0;
+}
+.colorName{
+	transition: .2s;
+}
+.selectorColor:hover .colorName{
+	transform: translateY(40px);
+}
+
+.hero{
+	grid-area: hero;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.designs{
+	grid-area: design;
+	display: flex;
+	width: 100%;
+	border-radius: 15px;
+	overflow: hidden;
+}
+.selectorDesign{
+	overflow: hidden;
+	cursor: pointer;
+}
+.designDisplay{
+	width: 100%;
+	transform: scale(2);
+	transform-origin: center center;
+}
+
+.info{
+	grid-area: info;
+	text-align: center;
+	margin: 60px 100px;
+}
+.info h1{
+	font-size: 40px;
+}
+.info h2{
+	margin-top: 70px;
+}
+
+.sizes{
+	display: flex;
+	justify-content: center;
+
+}
+.selectorSize{
+	padding: 10px;
+	border: 1px solid #a5a5a5;
+	border-radius: 10px;
+	width: 50px;
+	height: 40px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.selectorSize + .selectorSize{
+	margin-left: 10px;
+}
+.selectorSize:hover{
+	border: 1px solid black;
+}
+
+.selectorSizeSelected{
+	composes: selectorSize;
+	background: black;
+	color: white;
+}
