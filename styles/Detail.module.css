@@ -252,6 +252,7 @@
 	transition: .2s;
 	cursor: pointer;
 	display: block;
+	-webkit-appearance: none;
 }
 
 .notify:invalid input[type='submit']{
