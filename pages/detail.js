@@ -240,7 +240,7 @@ export default function Detail(props) {
 							</div>
 						</section>
 						<section>
-							<h2>Get your hoody</h2>
+							<h2>Your sweater</h2>
 							<div className={styles.detailGrid}>
 								<span>type</span>
 								<span>color</span>
@@ -253,13 +253,16 @@ export default function Detail(props) {
 							</div>
 
 							{/*<div className={styles.price}>€15.00</div>*/}
+						</section>
+						<section>
+							<h2>Get notified</h2>
 							<form className={styles.notify} action={'/notify'} method="POST" >
 								<input type="hidden" name="type" value={type} />
 								<input type="hidden" name="design" value={design} />
 								<input type="hidden" name="color" value={color} />
 								<input type="hidden" name="size" value={size} />
-								<input name={'email'} type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'email'} />
-								<input type={'submit'} value={'Get notified when sales open'} />
+								<input name={'email'} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'email'} />
+								<input type={'submit'} value={'Recieve an email when sales open'} />
 							</form>
 
 						</section>

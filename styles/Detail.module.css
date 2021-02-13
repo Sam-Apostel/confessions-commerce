@@ -230,11 +230,11 @@
 
 .notify{
 	display: grid;
-	margin: 40px 40px 0;
+	margin: 0 40px 0;
 	grid-template-columns: auto 1fr;
 	grid-gap: 10px;
 }
-.notify input[type='text']{
+.notify input[type='email']{
 	border: 1px solid #a5a5a5;
 	padding: 10px 20px;
 	border-radius: 5px;
@@ -252,6 +252,11 @@
 	transition: .2s;
 	cursor: pointer;
 	display: block;
+}
+
+.notify:invalid input[type='submit']{
+	cursor: default;
+	opacity: .4;
 }
 
 .info button:hover{
@@ -377,7 +382,7 @@
 		font-weight: 700;
 	}
 	.notify{
-		margin: 40px 0 0;
+		margin: 20px 0 0;
 		grid-template-columns: 1fr;
 	}
 }
