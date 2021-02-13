@@ -1,5 +1,6 @@
 .container {
 	min-height: 100vh;
+	min-height: -webkit-fill-available;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -16,6 +17,7 @@
 		'hero info';
 	width: 100vw;
 	height: 100vh;
+	height: -webkit-fill-available;
 	overflow: hidden;
 }
 
@@ -164,6 +166,7 @@
 	grid-area: info;
 	overflow-y: auto;
 	height: 100vh;
+	height: -webkit-fill-available;
 }
 .info{
 	text-align: center;
@@ -411,6 +414,7 @@
 	}
 	.infoWrapper{
 		height: calc(100vh - 150px);
+		height: calc(-webkit-fill-available - 150px);
 	}
 }
 
