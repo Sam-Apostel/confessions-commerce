@@ -1,14 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Detail.module.css';
 import {useState} from "react";
+import {useRouter} from "next/router"
 
 export default function Detail(props) {
 	const colors = [
-		{
-			name: 'Beauty Bush',
-			id: '1',
-			value: '#EDB4B4'
-		},
 		{
 			name: 'Regent St Blue',
 			id: '2',
@@ -20,14 +16,19 @@ export default function Detail(props) {
 			value: '#5F5F5F'
 		},
 		{
+			name: 'Waikawa Gray',
+			id: '5',
+			value: '#555B98'
+		},
+		{
 			name: 'Copper Rust',
 			id: '4',
 			value: '#8D4B4B'
 		},
 		{
-			name: 'Waikawa Gray',
-			id: '5',
-			value: '#555B98'
+			name: 'Beauty Bush',
+			id: '1',
+			value: '#EDB4B4'
 		},
 		{
 			name: 'Tubleweed',
@@ -37,52 +38,75 @@ export default function Detail(props) {
 	];
 	const designs = [
 		{
+			name: 'Confessions sunset icon',
+			id: '4',
+		},
+		{
 			name: 'Icon',
 			id: '1',
 		},
 		{
-			name: 'Regelet',
+			name: 'REGELET',
 			id: '2',
-		},
-		{
-			name: 'Simple text',
-			id: '3',
-		},
-		{
-			name: 'Icon + Simple text',
-			id: '4',
 		},
 		{
 			name: 'WEODEND',
 			id: '5',
 		},
+		{
+			name: 'Confessions sunset',
+			id: '3',
+		},
 	];
 	const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+	const types = [
+		{
+			id: '1',
+			name: 'Comfy Hoody'
+		},
+		{
+			id: '2',
+			name: 'Cozy Crewneck'
+		}
+	];
+
+	const router = useRouter();
+
+	const [type, setType] = useState(props.type ?? '1');
+
 	const [color, setColor] = useState(props.color ?? '1');
 	const [hoverColor, setHoverColor] = useState(undefined);
+
 	const [design, setDesign] = useState(props.design ?? '1');
 	const [hoverDesign, setHoverDesign] = useState(undefined);
-	const [size, setSize] = useState('m');
+
+	const [size, setSize] = useState(props.size ?? 'm');
+	const [hoverSize, setHoverSize] = useState(undefined);
+
+	const [email, setEmail] = useState('');
 
 	const displayColor = hoverColor ?? color;
 	const displayDesign = hoverDesign ?? design;
+	const displaySize = hoverSize ?? size;
 
-	const renderColor = ({ name, id, value }) => {
+	const renderColor = ({id, value}) => {
 		return (
 			<div
 				key={id}
-				className={styles.selectorColor}
-				onClick={() => setColor(id)}
+				className={id === color ? styles.selectorColorSelected : styles.selectorColor}
+				onClick={() => {
+					setColor(id);
+					router.replace({
+						pathname: '/detail',
+						query: {color: id, design, type, size},
+					});
+				}}
 				onMouseOver={() => setHoverColor(id)}
-				onMouseOut={() => setHoverColor(undefined)}
 			>
 				<span
-					className={styles.colorDisplay}
+					className={id === color ? styles.colorDisplaySelected : styles.colorDisplay}
 					style={{backgroundColor: value}}
 				/>
-				<span
-					className={styles.colorName}
-				>{name}</span>
 			</div>
 
 		)
@@ -93,16 +117,28 @@ export default function Detail(props) {
 		return (
 			<div
 				key={id}
-				className={styles.selectorDesign}
-				onClick={() => setDesign(id)}
+				className={id === design ? styles.selectorDesignSelected : styles.selectorDesign}
+				onClick={() => {
+					setDesign(id);
+					router.replace({
+						pathname: '/detail',
+						query: {color, design: id, type, size},
+					});
+				}}
 				onMouseOver={() => setHoverDesign(id)}
-				onMouseOut={() => setHoverDesign(undefined)}
+				onMouseOut={(e) => {
+					e.stopPropagation()
+				}}
 			>
-				<img
-					src={`/sweaters/color-${displayColor}_design-${id}.png`}
-					alt={name}
-					className={styles.designDisplay}
-				/>
+				<div>
+					<img
+						src={`/sweaters/design-${id}.png`}
+						alt={name}
+						className={styles.designDisplay}
+						style={{backgroundColor: colors.find(({id}) => id === displayColor).value}}
+					/>
+				</div>
+
 			</div>
 		)
 	};
@@ -112,62 +148,130 @@ export default function Detail(props) {
 			<div
 				key={value}
 				className={value === size ? styles.selectorSizeSelected : styles.selectorSize}
-				onClick={() => setSize(value)}
+				onClick={() => {
+					setSize(value);
+					router.replace({
+						pathname: '/detail',
+						query: {color, design, type, size: value},
+					});
+				}}
+				onMouseOver={() => setHoverSize(value)}
+				onMouseOut={(e) => {
+					e.stopPropagation()
+				}}
 			>
 				{value}
 			</div>
 		);
 	}
 
+	const renderType = ({id, name}) => (
+		<div
+			key={id}
+			onClick={() => {
+				setType(id);
+				router.replace({
+					pathname: '/detail',
+					query: {color, design, type: id, size},
+				});
+			}}
+			className={id === type ? styles.typeSelected : styles.typeNotSelected}
+		>{name}</div>
+	);
 
 	return (
 		<div className={styles.container}>
 			<Head>
 				<title>confessions shop - detail</title>
-				<link rel="icon" href="/favicon.ico" />
+				<link rel="icon" href="/favicon.ico"/>
 			</Head>
 
 			<main className={styles.main}>
-				<img
-					src={`/sweaters/color-${displayColor}_design-${displayDesign}.png`}
-					alt={`sweater color ${displayColor} with design ${displayDesign}`}
-					className={styles.hero}
-				/>
 				<div
-					className={styles.info}
+					className={styles.heroWrapper}
+					style={{backgroundColor: colors.find(({id}) => id === displayColor).value}}
 				>
-					<h1>Comfy Hoody</h1>
-					<section>
-						<h2>Pick a color</h2>
-						<div className={styles.colors}>
-							{colors.map(renderColor)}
-						</div>
-					</section>
-					<section>
-						<h2>Choose your design</h2>
-						<div className={styles.designs}>
-							{designs.map(renderDesigns)}
-						</div>
-					</section>
-					<section>
-						<h2>Choose your size</h2>
-						<div className={styles.sizes}>
-							{sizes.map(renderSize)}
-						</div>
-					</section>
-					<section>
-						<h2>Get your hoody</h2>
-						<span>price: €15.00</span>
+					<div
+						className={`${styles.hero} ${styles[`size-${displaySize}`]}`}
+					>
+						{types.map(({name: typeName, id: typeId}) => (
+							colors.map(({name: colorName, id: colorId}) => (
+								<img
+									key={`type-${typeId}_color-${colorId}`}
+									src={`/sweaters/color-${colorId}_type-${typeId}.png`}
+									alt={`${typeName} with color ${colorName}`}
+									className={colorId === displayColor && typeId === type ? styles.heroImgSelected : styles.heroImg}
+								/>
+							))
+						))}
+						<img
+							src={`/sweaters/design-${displayDesign}.png`}
+							alt={`design ${designs.find(({id}) => id === design).name}`}
+							className={styles.heroImgDesign}
+						/>
+					</div>
+				</div>
 
-					</section>
+				<div className={styles.infoWrapper}>
+					<div
+						className={styles.info}
+					>
+						<div className={type === types[0].id ? styles.typeContainerFirstSelected : styles.typeContainer}>
+							{types.map(renderType)}
+						</div>
+
+
+						<section>
+							<h2>Pick a color</h2>
+							<div className={styles.colors} onMouseLeave={() => setHoverColor(undefined)}>
+								{colors.map(renderColor)}
+							</div>
+						</section>
+						<section>
+							<h2>Choose your design</h2>
+							<div className={styles.designs} onMouseLeave={() => setHoverDesign(undefined)}>
+								{designs.map(renderDesigns)}
+							</div>
+						</section>
+						<section>
+							<h2>Choose your size</h2>
+							<div className={styles.sizes} onMouseLeave={() => setHoverSize(undefined)}>
+								{sizes.map(renderSize)}
+							</div>
+						</section>
+						<section>
+							<h2>Get your hoody</h2>
+							<div className={styles.detailGrid}>
+								<span>type</span>
+								<span>color</span>
+								<span>design</span>
+								<span>size</span>
+								<span>{types.find(({id}) => id === type).name}</span>
+								<span>{colors.find(({id}) => id === color).name}</span>
+								<span>{designs.find(({id}) => id === design).name}</span>
+								<span>{size}</span>
+							</div>
+
+							<div className={styles.price}>€15.00</div>
+							<form className={styles.notify} action={'/notify'} method="POST" >
+								<input type="hidden" name="type" value={type} />
+								<input type="hidden" name="design" value={design} />
+								<input type="hidden" name="color" value={color} />
+								<input type="hidden" name="size" value={size} />
+								<input name={'email'} type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'email'} />
+								<input type={'submit'} value={'Get notified when sales open'} />
+							</form>
+
+						</section>
+					</div>
 				</div>
 			</main>
 		</div>
 	);
 }
 
-Detail.getInitialProps = async ({ query }) => {
-	const {color, design} = query
+Detail.getInitialProps = async ({query}) => {
+	const {color, design, type, size} = query
 
-	return {color, design}
+	return {color, design, type, size}
 }
