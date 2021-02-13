@@ -252,7 +252,7 @@ export default function Detail(props) {
 								<span>{size}</span>
 							</div>
 
-							<div className={styles.price}>€15.00</div>
+							{/*<div className={styles.price}>€15.00</div>*/}
 							<form className={styles.notify} action={'/notify'} method="POST" >
 								<input type="hidden" name="type" value={type} />
 								<input type="hidden" name="design" value={design} />
