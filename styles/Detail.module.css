@@ -257,6 +257,7 @@
 .notify:invalid input[type='submit']{
 	cursor: default;
 	opacity: .4;
+	-webkit-appearance: none;
 }
 
 .info button:hover{
