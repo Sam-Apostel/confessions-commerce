@@ -2,73 +2,74 @@ import Head from 'next/head'
 import styles from '../styles/Detail.module.css';
 import {useState} from "react";
 import {useRouter} from "next/router"
+import {colors, designs, types, sizes} from '../data/products';
 
 export default function Detail(props) {
-	const colors = [
-		{
-			name: 'Regent St Blue',
-			id: '2',
-			value: '#AED9EB'
-		},
-		{
-			name: 'Scorpion',
-			id: '3',
-			value: '#5F5F5F'
-		},
-		{
-			name: 'Waikawa Gray',
-			id: '5',
-			value: '#555B98'
-		},
-		{
-			name: 'Copper Rust',
-			id: '4',
-			value: '#8D4B4B'
-		},
-		{
-			name: 'Beauty Bush',
-			id: '1',
-			value: '#EDB4B4'
-		},
-		{
-			name: 'Tubleweed',
-			id: '6',
-			value: '#E2AE8F'
-		},
-	];
-	const designs = [
-		{
-			name: 'Confessions sunset icon',
-			id: '4',
-		},
-		{
-			name: 'Icon',
-			id: '1',
-		},
-		{
-			name: 'REGELET',
-			id: '2',
-		},
-		{
-			name: 'WEODEND',
-			id: '5',
-		},
-		{
-			name: 'Confessions sunset',
-			id: '3',
-		},
-	];
-	const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
-	const types = [
-		{
-			id: '1',
-			name: 'Comfy Hoody'
-		},
-		{
-			id: '2',
-			name: 'Cozy Crewneck'
-		}
-	];
+	// const colors = [
+	// 	{
+	// 		name: 'Regent St Blue',
+	// 		id: '2',
+	// 		value: '#AED9EB'
+	// 	},
+	// 	{
+	// 		name: 'Scorpion',
+	// 		id: '3',
+	// 		value: '#5F5F5F'
+	// 	},
+	// 	{
+	// 		name: 'Waikawa Gray',
+	// 		id: '5',
+	// 		value: '#555B98'
+	// 	},
+	// 	{
+	// 		name: 'Copper Rust',
+	// 		id: '4',
+	// 		value: '#8D4B4B'
+	// 	},
+	// 	{
+	// 		name: 'Beauty Bush',
+	// 		id: '1',
+	// 		value: '#EDB4B4'
+	// 	},
+	// 	{
+	// 		name: 'Tubleweed',
+	// 		id: '6',
+	// 		value: '#E2AE8F'
+	// 	},
+	// ];
+	// const designs = [
+	// 	{
+	// 		name: 'Confessions sunset icon',
+	// 		id: '4',
+	// 	},
+	// 	{
+	// 		name: 'Icon',
+	// 		id: '1',
+	// 	},
+	// 	{
+	// 		name: 'REGELET',
+	// 		id: '2',
+	// 	},
+	// 	{
+	// 		name: 'WEODEND',
+	// 		id: '5',
+	// 	},
+	// 	{
+	// 		name: 'Confessions sunset',
+	// 		id: '3',
+	// 	},
+	// ];
+	// const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+	// const types = [
+	// 	{
+	// 		id: '1',
+	// 		name: 'Comfy Hoody'
+	// 	},
+	// 	{
+	// 		id: '2',
+	// 		name: 'Cozy Crewneck'
+	// 	}
+	// ];
 
 	const router = useRouter();
 

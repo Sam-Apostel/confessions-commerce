@@ -1,76 +1,47 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import {useRouter} from "next/router";
+import products from "../data/products";
 
-export default function Home() {
+export const getServerSideProps = async () => {
+	const items = products.colors.flatMap( color =>
+		products.designs.flatMap( design =>
+			products.types.map( type => (
+				{color, design, type}
+			))
+		)
+	).sort(() => Math.random() - 0.5);
+
+	return {
+		props: {
+			items,
+		},
+	}
+}
+
+export default function Home({items}) {
 	const router = useRouter();
-
-	const colors = [
-		{
-			name: 'Beauty Bush',
-			id: '1',
-			value: '#EDB4B4'
-		},
-		{
-			name: 'Regent St Blue',
-			id: '2',
-			value: '#AED9EB'
-		},
-		{
-			name: 'Scorpion',
-			id: '3',
-			value: '#5F5F5F'
-		},
-		{
-			name: 'Copper Rust',
-			id: '4',
-			value: '#8D4B4B'
-		},
-		{
-			name: 'Waikawa Gray',
-			id: '5',
-			value: '#555B98'
-		},
-		{
-			name: 'Tubleweed',
-			id: '6',
-			value: '#E2AE8F'
-		},
-	];
-	const designs = 5;
-	const types = 2;
-
-	const renderSweaters = () => {
-		const sweaters = [];
-		colors.forEach( (color) => {
-			for (let design = 1; design <= designs; design++) {
-				for (let type = 1; type <= types; type++){
-					sweaters.push({color, design, type});
-				}
-
-			}
-		});
-		return (
-			<div className={styles.gallery}>
-				{sweaters.sort(() => Math.random() - 0.5).map(renderSweater)}
-			</div>
-		);
-	};
-
 	const renderSweater = ({color, design, type}, index) => {
 		return (
 			<figure
-				key={`color-${color.id}_design-${design}_type-${type}`}
+				key={`color-${color.id}_design-${design.id}_type-${type.id}`}
 				className={styles.shopItem}
-				onClick={() => router.push({pathname: '/detail', query: {color: color.id, design, type}} )}
+				onClick={() => router.push({
+					pathname: '/detail',
+					query: {
+						color: color.id,
+						design: design.id,
+						type: type.id
+					}
+				} )}
 				style={{backgroundColor: color.value}}
 			>
 				<img
-					src={`/sweaters/color-${color.id}_type-${type}.png`} alt={`sweater color ${color.id} with design ${design}`}
+					src={`/sweaters/color-${color.id}_type-${type.id}.png`} alt={`${type.name} with color ${color.name}`}
 					className={styles.shopItemImage}
 				/>
 				<img
-					src={`/sweaters/design-${design}.png`} alt={`sweater color ${color.id} with design ${design}`}
+					src={`/sweaters/design-${design.id}.png`} alt={`design ${design.name}`}
 					className={styles.shopItemImageDesign}
 				/>
 			</figure>
@@ -86,7 +57,9 @@ export default function Home() {
 			</Head>
 
 			<main className={styles.main}>
-				{renderSweaters()}
+				<div className={styles.gallery}>
+					{items.map(renderSweater)}
+				</div>
 			</main>
 		</div>
 	)
