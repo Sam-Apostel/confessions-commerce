@@ -53,6 +53,7 @@ export default function Home({items}) {
 		<div className={styles.container}>
 			<Head>
 				<title>confessions shop</title>
+				<meta name={'Description'} content={'Buy the latest UAntwerpen confessions merch.'}/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
