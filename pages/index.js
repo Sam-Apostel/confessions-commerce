@@ -67,10 +67,10 @@ export default function Home({items}) {
 
 				<meta name="facebook-domain-verification" content="41r3v9ds3l6ub8kt3nit0aya4vqdod" />
 
-				<meta name="og:url" content="https://confessions.link/" />
-				<meta name="og:title" content="confessions shop" />
-				<meta name="og:description" content="Buy the latest UAntwerpen confessions merch." />
-				<meta name="og:image" content="/openGraph.png" />
+				<meta property="og:url" content="https://confessions.link/" />
+				<meta property="og:title" content="confessions shop" />
+				<meta property="og:description" content="Buy the latest UAntwerpen confessions merch." />
+				<meta property="og:image" content="/openGraph.png" />
 			</Head>
 
 			<main className={styles.main}>
