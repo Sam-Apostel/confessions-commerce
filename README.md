@@ -29,6 +29,7 @@ selecting multiple items |
 add more products | 
 seo | 
 photo galley |
+a11y | 
 
 
 

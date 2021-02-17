@@ -64,6 +64,13 @@ export default function Home({items}) {
 				<title>confessions shop</title>
 				<meta name={'Description'} content={'Buy the latest UAntwerpen confessions merch.'}/>
 				<link rel="icon" href="/favicon.ico" />
+
+				<meta name="facebook-domain-verification" content="41r3v9ds3l6ub8kt3nit0aya4vqdod" />
+
+				<meta name="og:url" content="https://confessions.link/" />
+				<meta name="og:title" content="confessions shop" />
+				<meta name="og:description" content="Buy the latest UAntwerpen confessions merch." />
+				<meta name="og:image" content="/openGraph.png" />
 			</Head>
 
 			<main className={styles.main}>
