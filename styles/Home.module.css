@@ -1,3 +1,4 @@
+
 .container {
 	min-height: 100vh;
 	display: flex;
@@ -14,7 +15,9 @@
 
 .gallery{
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	--columns: 5;
+	grid-template-columns: repeat(var(--columns), 1fr);
+	grid-template-rows: repeat(20, 1fr);
 	cursor: pointer;
 }
 
@@ -24,15 +27,9 @@
 }
 
 .shopItem{
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
 	margin: 0;
-	font-size: 0;
-
-	overflow: hidden;
 	position: relative;
+	min-height: calc(100vw / var(--columns));
 }
 
 
@@ -59,51 +56,50 @@
 	grid-column: 2 / span 2;
 	grid-row: 8 / span 2;
 }
+.shopItem:nth-of-type(6){
+	grid-column: 4 / span 2;
+	grid-row: 11 / span 2;
+}
+.shopItem:nth-of-type(7){
+	grid-column: 1 / span 2;
+	grid-row: 12 / span 2;
+}
+.shopItem:nth-of-type(8){
+	grid-column: 2 / span 3;
+	grid-row: 15 / span 3;
+}
+.shopItem:nth-of-type(9){
+	grid-column: 3 / span 2;
+	grid-row: 19 / span 2;
+}
+.shopItem:nth-of-type(10){
+	grid-column: 1 / span 2;
+	grid-row: 18 / span 2;
+}
 .shopItemImage{
-	width: 100%;
-	height: 100%;
+	/*width: 100%;*/
+	/*height: 100%;*/
 	transform: scale(0.8);
 	transition: .3s;
 }
 .shopItemImageDesign{
 	composes: shopItemImage;
-	position: absolute;
-	top: 0;
-	left: 0;
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
 }
+
+
 .shopItem:hover .shopItemImage{
 	transform: scale(1);
 }
 
-.footer {
-	width: 100%;
-	height: 100px;
-	border-top: 1px solid #eaeaea;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color:white;
-}
-
-.footer img {
-	margin-left: 0.5rem;
-}
-
-.footer span {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-
-.logo {
-	height: 3em;
-}
 
 
 @media (max-width: 1600px) {
 	.gallery{
-		grid-template-columns: repeat(4, 1fr);
+		--columns: 4;
+		grid-template-rows: repeat(29, 1fr);
 	}
 
 	.shopItem:nth-of-type(1){
@@ -135,17 +131,41 @@
 		grid-column: 2 / span 2;
 		grid-row: 16 / span 2;
 	}
+	.shopItem:nth-of-type(8){
+		grid-column: 1 / span 3;
+		grid-row: 19 / span 3;
+	}
+	.shopItem:nth-of-type(9){
+		grid-column: 3 / span 2;
+		grid-row: 23 / span 2;
+	}
+	.shopItem:nth-of-type(10){
+		grid-column: 1 / span 2;
+		grid-row: 23 / span 2;
+	}
+	.shopItem:nth-of-type(11){
+		grid-column: 2 / span 2;
+		grid-row: 26 / span 2;
+	}
+	.shopItem:nth-of-type(12){
+		grid-column: 3 / span 2;
+		grid-row: 28 / span 2;
+	}
+	.shopItem:nth-of-type(13){
+		grid-column: 1 / span 2;
+		grid-row: 28 / span 2;
+	}
 }
 
 @media (max-width: 1200px) {
 	.gallery{
-		grid-template-columns: repeat(3, 1fr);
+		--columns: 3;
+		grid-template-rows: repeat(37, 1fr);
 	}
 	.shopItem:nth-of-type(1){
 		grid-column: 1 / span 2;
 		grid-row: 1 / span 2;
 	}
-
 	.shopItem:nth-of-type(2){
 		grid-column: 2 / span 2;
 		grid-row: 4 / span 2;
@@ -167,14 +187,39 @@
 		grid-row: 16 / span 3;
 	}
 	.shopItem:nth-of-type(7){
+		grid-column: 1 / span 2;
+		grid-row: 20 / span 2;
+	}
+	.shopItem:nth-of-type(8){
+		grid-column: 2 / span 2;
+		grid-row: 23 / span 2;
+	}
+	.shopItem:nth-of-type(9){
+		grid-column: 2 / span 2;
+		grid-row: 26 / span 2;
+	}
+	.shopItem:nth-of-type(10){
+		grid-column: 1 / span 2;
+		grid-row: 29 / span 2;
+	}
+	.shopItem:nth-of-type(11){
+		grid-column: 2 / span 2;
+		grid-row: 31 / span 2;
+	}
+	.shopItem:nth-of-type(12){
 		grid-column: 1 / span 3;
-		grid-row: 20 / span 3;
+		grid-row: 34 / span 3;
+	}
+	.shopItem:nth-of-type(13){
+		grid-column: unset;
+		grid-row: unset;
 	}
 }
 
 @media (max-width: 800px) {
 	.gallery{
-		grid-template-columns: repeat(2, 1fr);
+		--columns: 2;
+		grid-template-rows: repeat(50, 1fr);
 	}
 	.shopItem:nth-of-type(1){
 		grid-column: 1 / span 2;
@@ -208,11 +253,35 @@
 		grid-column: 1 / span 2;
 		grid-row: 25 / span 2;
 	}
+	.shopItem:nth-of-type(9){
+		grid-column: 1 / span 2;
+		grid-row: 28 / span 2;
+	}
+	.shopItem:nth-of-type(10){
+		grid-column: 1 / span 2;
+		grid-row: 32 / span 2;
+	}
+	.shopItem:nth-of-type(11){
+		grid-column: 1 / span 2;
+		grid-row: 34 / span 2;
+	}
+	.shopItem:nth-of-type(12){
+		grid-column: 1 / span 2;
+		grid-row: 38 / span 2;
+	}
+	.shopItem:nth-of-type(13){
+		grid-column: 1 / span 2;
+		grid-row: 42 / span 2;
+	}
+	.shopItem:nth-of-type(14){
+		grid-column: 1 / span 2;
+		grid-row: 47 / span 2;
+	}
 }
 
 @media (max-width: 600px) {
 	.gallery{
-		grid-template-columns: repeat(1, 1fr);
+		--columns: 1;
 	}
 	.shopItem{
 		grid-column: unset !important;

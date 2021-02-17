@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import {useRouter} from "next/router";
-import products from "../data/products";
+import {useRouter} from 'next/router';
+import Image from 'next/image';
+import products from '../data/products';
 
 export const getServerSideProps = async () => {
 	const items = products.colors.flatMap( color =>
@@ -36,13 +37,21 @@ export default function Home({items}) {
 				} )}
 				style={{backgroundColor: color.value}}
 			>
-				<img
-					src={`/sweaters/color-${color.id}_type-${type.id}.png`} alt={`${type.name} with color ${color.name}`}
+				<Image
+					src={`/sweaters/color-${color.id}_type-${type.id}.png`}
+					alt={`${type.name} with color ${color.name}`}
 					className={styles.shopItemImage}
+					layout={'fill'}
+					objectFit={'contain'}
+					// sizes={''}
+					// priority={index < 14}
 				/>
-				<img
-					src={`/sweaters/design-${design.id}.png`} alt={`design ${design.name}`}
+				<Image
+					src={`/sweaters/design-${design.id}.png`}
+					alt={`design ${design.name}`}
 					className={styles.shopItemImageDesign}
+					layout={'fill'}
+					objectFit={'contain'}
 				/>
 			</figure>
 		);
