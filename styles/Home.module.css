@@ -80,7 +80,7 @@
 	/*width: 100%;*/
 	/*height: 100%;*/
 	transform: scale(0.8);
-	transition: .3s;
+	transition: scale .3s;
 }
 .shopItemImageDesign{
 	composes: shopItemImage;
